@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>todoAPP</title>
+    <script src="https://kit.fontawesome.com/15d5694a8d.js"></script>
+    <style media="screen">
+      span {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      i {
+        position: absolute;
+        left: 0;
+      }
+
+      ul {
+        list-style-type: none;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" name="" value="" placeholder="Add a New toDO here">
+    <button type="button" name="button">Add</button>
+    <button id="secondButton" type="button" name="button">Clear</button>
+
+    <ul>
+      <!-- Lists are added here -->
+    </ul>
+    <script type="text/javascript">
+
+      //delete a todo list
+      const deleteTodo = (i) => {
+        i.addEventListener("click", (event) => {
+        i.parentElement.remove();
+        event.stopPropagationn();
+        })
+      };
+
+      let ul = document.querySelector("ul");
+      let button = document.querySelector("button");
+      let clearButton = document.getElementById('secondButton');
+
+      button.addEventListener("click", () => {
+        let input = document.querySelector("input");
+
+        let list = document.createElement("li");
+        let content = document.createTextNode(input.value);
+        let span = document.createElement("span");
+
+        let icon = document.createElement("i");
+        icon.setAttribute("class", "fas fa-trash");
+        if (input.value == ""){
+          alert("You must enter something");
+        }else {
+          ul.appendChild(list);
+          span.appendChild(content);
+          span.appendChild(icon);
+          list.appendChild(span);
+
+          //clear the value of the input after clicking the button
+          input.value = "";
+        }
+
+        deleteTodo(icon);
+      });
+
+
+    </script>
+  </body>
+</html>
