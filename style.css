@@ -1,0 +1,13 @@
+span {
+  position: relative;
+  padding-left: 20px;
+}
+
+i {
+  position: absolute;
+  left: 0;
+}
+
+ul {
+  list-style-type: none;
+}
