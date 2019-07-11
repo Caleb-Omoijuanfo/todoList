@@ -1,13 +1,55 @@
+html {
+  background-image: linear-gradient(#3b5998, #6d84b4);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+body {
+  background-image: linear-gradient(#3b5998, #6d84b4);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+
+.container-fluid {
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  margin-top: 3%;
+}
+
 span {
   position: relative;
   padding-left: 20px;
 }
 
-i {
+input[type=checkbox] {
   position: absolute;
   left: 0;
+  top: 5px;
+}
+
+i {
+  position: absolute;
+  padding-left: 5px;
 }
 
 ul {
   list-style-type: none;
+}
+
+/* Mobile optimisation */
+@media screen and (max-width: 700px) {
+  .app {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 760px ) {
+  .app {
+    width: 100% !important;
+  }
 }
