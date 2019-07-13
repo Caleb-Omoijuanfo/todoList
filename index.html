@@ -22,7 +22,7 @@
 
     <div class="container-fluid">
       <div class="app" style="width: 50%">
-        <h1>To-do List</h1>
+        <h1 style="color: white">To-do List</h1>
 
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Enter new To-do list" aria-label="Recipient's username" aria-describedby="basic-addon2">
@@ -39,7 +39,10 @@
           </div>
         </div>
 
-        <button id="clearButton" type="button" name="button">Clear</button>
+        <div class="" style="margin-top: 10px">
+          <button id="clearButton" type="button" class="btn btn-primary" style="background-color: #e9ecef; color: #495057">Clear</button>
+        </div>
+
       </div>
 
     </div>
@@ -49,28 +52,54 @@
       //delete a todo list..
       const deleteTodo = (i) => {
         i.addEventListener("click", (event) => {
-          i.parentElement.remove();
+          i.parentElement.parentElement.remove();
           event.stopPropagation();
         })
       };
 
       //Strikethrough completed todo list..
-      const doneTodo = (l) => {
-        l.addEventListener("click", () => {
-          l.style.textDecoration = "line-through";
+      const doneTodo = (l, cb) => {
+        cb.addEventListener("click", () => {
+          if(cb.checked === true){
+            l.style.textDecoration = "line-through";
+          }
+        });
+      };
+
+      //Unstrike completed todo list..
+      const undoTodo = (l, cb) => {
+        cb.addEventListener("click", () => {
+          if(cb.checked === false){
+            l.style.textDecoration = "none";
+          }
+        });
+      };
+
+      //Clear todo list..
+      const clearList = (b) => {
+        let delList = document.querySelectorAll("li");
+
+        b.addEventListener("click", () => {
+          for (let del of Array.from(delList)){
+            del.remove();
+          }
         });
       };
 
       let ul = document.querySelector("ul");
       let button = document.getElementById("basic-addon2")
-      let clearButton = document.getElementById('secondButton');
+      let clearButton = document.getElementById('clearButton');
 
       button.addEventListener("click", () => {
         let input = document.querySelector("input");
 
         let list = document.createElement("li");
+
         let content = document.createTextNode(input.value);
         let span = document.createElement("span");
+        let span2 = document.createElement("span");
+        span2.setAttribute('class', 'secondSpan');
+
         let checkButton = document.createElement("input");
         checkButton.type = "checkbox";
 
@@ -81,16 +110,19 @@
         }else {
           ul.appendChild(list);
           span.appendChild(content);
-          span.appendChild(icon);
+          span2.appendChild(icon);
           span.appendChild(checkButton);
           list.appendChild(span);
+          list.appendChild(span2);
 
           //clear the value of the input after clicking the button
           input.value = "";
         }
 
         deleteTodo(icon);
-        doneTodo(list);
+        doneTodo(list, checkButton);
+        undoTodo(list, checkButton);
+        clearList(clearButton);
       });
     </script>
 
